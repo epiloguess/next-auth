@@ -147,8 +147,10 @@ Then you can access the `session` on the `$page.data` object in your page.
 ```ts filename="app.ts"
 import { getSession } from "@auth/express"
 
-export function authSession(req: Request, res: Response, next: NextFunction) {
-  res.locals.session = await getSession(req)
+// authConfig is the parameter object passed to the `ExpressAuth` function.
+// See: https://authjs.dev/getting-started/installation#configure
+export async function authSession(req: Request, res: Response, next: NextFunction) {
+  res.locals.session = await getSession(req, authConfig)
   next()
 }
 
